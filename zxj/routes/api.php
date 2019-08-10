@@ -20,7 +20,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['test'])->match(['get','post'],'test/test1','Api\TestController@test1');
 
 /*******************************************公共pi**********************************************************/
-
+//新增帮助分类
+Route::match(['get','post'],'helpCenter/addHelpCate','Api\HelpCenterController@addHelpCate');
+//帮助分类列表
+Route::match(['get','post'],'helpCenter/helpCateList','Api\HelpCenterController@helpCateList');
+//编辑帮助分类
+Route::match(['get','post'],'helpCenter/editHelpCate','Api\HelpCenterController@editHelpCate');
+//删除帮助分类
+Route::match(['get','post'],'helpCenter/delHelpCate','Api\HelpCenterController@delHelpCate');
+//新增帮助
+Route::match(['get','post'],'helpCenter/addHelp','Api\HelpCenterController@addHelp');
+//帮助列表
+Route::match(['get','post'],'helpCenter/helpList','Api\HelpCenterController@helpList');
+//编辑帮助
+Route::match(['get','post'],'helpCenter/editHelp','Api\HelpCenterController@editHelp');
+//删除帮助
+Route::match(['get','post'],'helpCenter/delHelp','Api\HelpCenterController@delHelp');
 
 /*******************************************零售商api**********************************************************/
 //概况
