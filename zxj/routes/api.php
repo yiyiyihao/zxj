@@ -24,6 +24,8 @@ Route::middleware(['test'])->match(['get','post'],'test/test1','Api\TestControll
 Route::match(['get','post'],'helpCenter/addHelpCate','Api\HelpCenterController@addHelpCate');
 //帮助分类列表
 Route::match(['get','post'],'helpCenter/helpCateList','Api\HelpCenterController@helpCateList');
+//帮助分类信息
+Route::match(['get','post'],'helpCenter/HelpCateInfo','Api\HelpCenterController@HelpCateInfo');
 //编辑帮助分类
 Route::match(['get','post'],'helpCenter/editHelpCate','Api\HelpCenterController@editHelpCate');
 //删除帮助分类
