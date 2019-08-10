@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
 class HelpCenterController extends BasicController
 {
@@ -11,13 +12,32 @@ class HelpCenterController extends BasicController
     //添加分类
     public function addHelpCate()
     {
-        return 11111;
+        $this->_checkParams();
+        $params = $this->params;
+        $name = isset($params['name']) ? trim($params['name']) : '';
+        $sort = isset($params['sort_order']) ? intval($params['sort_order']) : 255;
+        if(empty($name)){
+            $this->returnJson(1,'分类名称不能为空');
+        }
+        $data = [
+          'name'=>$name,
+          'is_del'=>0,
+          'status'=>1,
+          'sort_order'=>$sort,
+          'add_time'=>time(),
+        ];
+        $result = DB::table('help_cate')->insertGetId($data);
+        if($result === false){
+            $this->returnJson(1,'新增失败，服务器繁忙');
+        }
+        $this->returnJson(0,'success',$result);
     }
 
     //分类列表
     public function helpCateList()
     {
-        return 11111;
+        
+        return 'C.id,C.name,C.sort_order,C.status';
     }
 
     //编辑分类
