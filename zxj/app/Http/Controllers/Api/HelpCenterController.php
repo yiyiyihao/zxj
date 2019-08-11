@@ -44,6 +44,10 @@ class HelpCenterController extends BasicController
         $size = isset($params['size']) ? intval($params['size']) : 10;
         $offset = ($page-1) * $size;
 
+        $totalRows = DB::table('help_cate')->where('is_del',0)->count();
+        if($totalRows == 0){
+            $this->returnJson(0,'success',['total'=>0,'list'=>[]]);
+        }
         $subTb = DB::table('help_cate')->select('id')->where([['is_del','=',0]])->orderBy('sort_order',$sortOrder)->offset($offset)->limit($size);
 
         $data = DB::table('help_cate')
@@ -52,7 +56,7 @@ class HelpCenterController extends BasicController
             })->select('help_cate.id','help_cate.name','help_cate.sort_order','help_cate.status')
             ->get();
 
-        $this->returnJson(0,'success',$data);
+        $this->returnJson(0,'success',['total'=>$totalRows,'list'=>$data]);
     }
 
     //分类信息
@@ -172,6 +176,36 @@ class HelpCenterController extends BasicController
     {
         $this->_checkParams();
         $params = $this->params;
+        $page = isset($params['page']) ? intval($params['page']) : 1;
+        $size = isset($params['size']) ? intval($params['size']) : 10;
+        $offset = ($page-1) * $size;
+        $sort = isset($params['sort_order']) ? intval($params['sort_order']) : 0; //默认0正序，1倒序
+        $sort = $sort === 0 ? 'ASC' : 'DESC';
+
+        $totalRows = DB::table('help')->where('is_del',0)->count();
+        if($totalRows == 0){
+            $this->returnJson(0,'success',['total'=>0,'list'=>[]]);
+        }
+
+        $sub = DB::table('help')->select('id')->where('is_del',0)->orderBy('sort_order',$sort)->offset($offset)->limit($size);
+        $data = DB::table('help')
+            ->joinSub($sub,'sub',function($join){
+                $join->on('help.id','=','sub.id');
+            })
+            ->leftJoin('help_cate as hc','help.cate_id','=','hc.id')
+            ->select('help.id','hc.name as cate_name','help.title','help.visible_store_type','help.sort_order')
+            ->where([
+                ['hc.is_del','=',0],
+            ])->get();
+        foreach($data as $k => $v){
+            $data[$k]->visible_store_type = str_replace(['1','2','3','4','5','6'],['厂商','渠道商','零售商','服务商','回响应用商户','新服务商'],$v->visible_store_type);
+        }
+        $this->returnJson(0,'success',['total'=>$totalRows,'list'=>$data]);
+    }
+
+    //详情
+    public function helpInfo()
+    {
         
     }
 
