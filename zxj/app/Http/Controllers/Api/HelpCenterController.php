@@ -28,7 +28,7 @@ class HelpCenterController extends BasicController
         ];
         $result = DB::table('help_cate')->insertGetId($data);
         if($result === false){
-            $this->returnJson(1,'新增失败，服务器繁忙');
+            $this->returnJson(1,'新增失败');
         }
         $this->returnJson(0,'success',$result);
     }
@@ -126,13 +126,53 @@ class HelpCenterController extends BasicController
     //新增
     public function addHelp()
     {
-        return 11111;
+        $this->_checkParams();
+        $params = $this->params;
+        $cateId = isset($params['cate_id']) ? intval($params['cate_id']) : 0;
+        $title = isset($params['title']) ? trim($params['title']) : '';
+        $answer = isset($params['answer']) ? trim($params['answer']) : '';
+        $visible_store_type = isset($params['visible_store_type']) ? trim($params['visible_store_type']) : '';
+        $sort = isset($params['sort_order']) ? intval($params['sort_order']) : 255;
+
+        if(empty($cateId)){
+            $this->returnJson(1,'所属分类不能为空');
+        }
+        if(empty($title)){
+            $this->returnJson(1,'帮助问题不能为空');
+        }
+        $cateExist = DB::table('help_cate')
+            ->where([
+                ['id','=',$cateId],
+                ['is_del','=',0],
+            ])->first();
+
+        if($cateExist === null){
+            $this->returnJson(1,'帮助分类不存在');
+        }
+
+        $data = [
+            'cate_id'=>$cateId,
+            'title'=>$title,
+            'answer'=>$answer,
+            'visible_store_type'=>$visible_store_type,
+            'is_del'=>0,
+            'status'=>1,
+            'sort_order'=>$sort,
+            'add_time'=>time(),
+        ];
+        $result = DB::table('help')->insertGetId($data);
+        if($result === false){
+            $this->returnJson(1,'新增失败');
+        }
+        $this->returnJson(0,'success',$result);
     }
 
     //列表
     public function helpList()
     {
-        return 11111;
+        $this->_checkParams();
+        $params = $this->params;
+        
     }
 
     //编辑
@@ -145,6 +185,23 @@ class HelpCenterController extends BasicController
     public function delHelp()
     {
         return 11111;
+    }
+
+    //商户类型列表
+    public function storeTypeList()
+    {
+        //商户类型(1厂商 2渠道商 3零售商/零售商 4服务商 5回响应用商户,6新服务商)
+        //没有对应数据表
+        $data = [
+            ['id'=>STORE_FACTORY,'name'=>'厂商'],
+            ['id'=>STORE_CHANNEL,'name'=>'渠道商'],
+            ['id'=>STORE_DEALER,'name'=>'零售商'],
+            ['id'=>STORE_SERVICE,'name'=>'服务商'],
+            ['id'=>STORE_ECHODATA,'name'=>'回响应用商户'],
+            ['id'=>STORE_SERVICE_NEW,'name'=>'新服务商'],
+        ];
+
+        $this->returnJson(0,'success',$data);
     }
 
 }

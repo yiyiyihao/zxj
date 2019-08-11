@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0741b27e-0592-473d-a9af-7dab3cba3ed6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/zxj/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/zxj/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HelpCenterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HelpCenterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zxj/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/zxj/routes/api.php" afterDir="false" />
     </list>
@@ -31,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zxj/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+            <state relative-caret-position="609">
+              <caret line="41" column="53" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -40,7 +41,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
+            <state relative-caret-position="496">
               <caret line="1050" column="39" selection-start-line="1050" selection-start-column="28" selection-end-line="1050" selection-end-column="39" />
               <folding>
                 <element signature="e#229#511#0#PHP" />
@@ -267,14 +268,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HelpCenterController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="118" column="35" selection-start-line="118" selection-start-column="35" selection-end-line="118" selection-end-column="35" />
+            <state relative-caret-position="485">
+              <caret line="174" selection-start-line="174" selection-end-line="174" />
               <folding>
                 <element signature="e#44#72#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/zxj/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -312,8 +322,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zxj/app/const.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="9" column="48" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="48" />
+            <state relative-caret-position="330">
+              <caret line="20" column="56" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -354,6 +364,7 @@
         <option value="$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HomeController.php" />
         <option value="$PROJECT_DIR$/zxj/routes/api.php" />
         <option value="$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HelpCenterController.php" />
+        <option value="$PROJECT_DIR$/zxj/.gitignore" />
       </list>
     </option>
   </component>
@@ -535,12 +546,12 @@
       <updated>1564567390946</updated>
       <workItem from="1564567392074" duration="37032000" />
       <workItem from="1564966687189" duration="91105000" />
-      <workItem from="1565312845218" duration="42069000" />
+      <workItem from="1565312845218" duration="46223000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170206000" />
+    <option name="totallyTimeSpent" value="174360000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -827,20 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/zxj/app/const.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="48" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zxj/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/zxj/app/helpers.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -858,9 +855,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/zxj/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
+        <state relative-caret-position="496">
           <caret line="1050" column="39" selection-start-line="1050" selection-start-column="28" selection-end-line="1050" selection-end-column="39" />
           <folding>
             <element signature="e#229#511#0#PHP" />
@@ -1086,27 +1090,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/zxj/.env">
+    <entry file="file://$PROJECT_DIR$/zxj/app/const.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="31" />
+        <state relative-caret-position="330">
+          <caret line="20" column="56" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zxj/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+        <state relative-caret-position="609">
+          <caret line="41" column="53" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zxj/app/Http/Controllers/Api/HelpCenterController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="118" column="35" selection-start-line="118" selection-start-column="35" selection-end-line="118" selection-end-column="35" />
+        <state relative-caret-position="485">
+          <caret line="174" selection-start-line="174" selection-end-line="174" />
           <folding>
             <element signature="e#44#72#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zxj/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>

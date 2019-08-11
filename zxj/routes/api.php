@@ -38,6 +38,8 @@ Route::match(['get','post'],'helpCenter/helpList','Api\HelpCenterController@help
 Route::match(['get','post'],'helpCenter/editHelp','Api\HelpCenterController@editHelp');
 //删除帮助
 Route::match(['get','post'],'helpCenter/delHelp','Api\HelpCenterController@delHelp');
+//商户类型列表
+Route::match(['get','post'],'helpCenter/storeTypeList','Api\HelpCenterController@storeTypeList');
 
 /*******************************************零售商api**********************************************************/
 //概况
