@@ -168,7 +168,7 @@ class HelpCenterController extends BasicController
             'cate_id'=>$cateId,
             'title'=>$title,
             'answer'=>$answer,
-            'visible_store_type'=>$visible_store_type,
+            'visible_store_type'=>$visible_store_type .','.ADMIN_SYSTEM,
             'is_del'=>0,
             'status'=>1,
             'sort_order'=>$sort,
@@ -191,19 +191,31 @@ class HelpCenterController extends BasicController
         $offset = ($page-1) * $size;
         $sort = isset($params['sort_order']) ? intval($params['sort_order']) : 0; //默认0正序，1倒序
         $sort = $sort === 0 ? 'ASC' : 'DESC';
+        $cateId = isset($params['cate_id']) ? intval($params['cate_id']) : 0;
+        $where = [];
+        if($cateId != 0){
+            $where = [
+                ['cate_id','=',$cateId],
+            ];
+        }
+        //根据登入用户商户信息，获取商户可看的帮助问题
+        #todo
+        $userType = ADMIN_SYSTEM;
 
-        $totalRows = DB::table('help')->where('is_del',0)->count();
+
+
+        $totalRows = DB::table('help')->where('is_del',0)->where($where)->whereRaw('FIND_IN_SET(?,visible_store_type)', [$userType])->count();
         if($totalRows == 0){
             $this->returnJson(0,'success',['total'=>0,'list'=>[]]);
         }
 
-        $sub = DB::table('help')->select('id')->where('is_del',0)->orderBy('sort_order',$sort)->offset($offset)->limit($size);
+        $sub = DB::table('help')->select('id')->where('is_del',0)->where($where)->whereRaw('FIND_IN_SET(?,visible_store_type)', [$userType])->orderBy('sort_order',$sort)->offset($offset)->limit($size);
         $data = DB::table('help')
             ->joinSub($sub,'sub',function($join){
                 $join->on('help.id','=','sub.id');
             })
             ->leftJoin('help_cate as hc','help.cate_id','=','hc.id')
-            ->select('help.id','hc.name as cate_name','help.title','help.visible_store_type','help.sort_order')
+            ->select('help.id','help.cate_id','hc.name as cate_name','help.title','help.visible_store_type','help.sort_order')
             ->where([
                 ['hc.is_del','=',0],
             ])->get();
