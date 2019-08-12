@@ -114,6 +114,16 @@ class HelpCenterController extends BasicController
             $this->returnJson(1,'缺失id');
         }
 
+        $helpExist = DB::table('help')
+            ->where([
+                ['id','=',$id],
+                ['is_del','=',0],
+            ])->first();
+
+        if($helpExist != null){
+            $this->returnJson(1,'分类旗下有帮助问题，先删除帮助问题');
+        }
+
         $data = DB::table('help_cate')
             ->where('id',$id)
             ->update([
@@ -206,19 +216,100 @@ class HelpCenterController extends BasicController
     //详情
     public function helpInfo()
     {
-        
+        $this->_checkParams();
+        $params = $this->params;
+        $id = isset($params['id']) ? intval($params['id']) : 0;
+
+        if($id === 0){
+            $this->returnJson(1,'id缺失');
+        }
+        $data = DB::table('help')
+            ->leftJoin('help_cate as hc','help.cate_id','=','hc.id')
+            ->select('help.id','help.title','help.cate_id','hc.name as cate_name','help.visible_store_type','help.sort_order','help.answer')
+            ->where([
+                ['help.id','=',$id],
+                ['help.is_del','=',0],
+            ])
+            ->first();
+        if($data === null){
+            $this->returnJson(0,'success',[]);
+        }
+
+        $data->visible_store_type = str_replace(['1','2','3','4','5','6'],['厂商','渠道商','零售商','服务商','回响应用商户','新服务商'],$data->visible_store_type);
+        $this->returnJson(0,'success',$data);
+
     }
 
     //编辑
     public function editHelp()
     {
-        return 11111;
+        $this->_checkParams();
+        $params = $this->params;
+        $id = isset($params['id']) ? intval($params['id']) : 0;
+        $cateId = isset($params['cate_id']) ? intval($params['cate_id']) : 0;
+        $title = isset($params['title']) ? trim($params['title']) : '';
+        $answer = isset($params['answer']) ? trim($params['answer']) : '';
+        $visible_store_type = isset($params['visible_store_type']) ? trim($params['visible_store_type']) : '';
+        $sort = isset($params['sort_order']) ? intval($params['sort_order']) : 255;
+
+        if($id === 0){
+            $this->returnJson(1,'id缺失');
+        }
+        if(empty($cateId)){
+            $this->returnJson(1,'所属分类不能为空');
+        }
+        if(empty($title)){
+            $this->returnJson(1,'帮助问题不能为空');
+        }
+        $cateExist = DB::table('help_cate')
+            ->where([
+                ['id','=',$cateId],
+                ['is_del','=',0],
+            ])->first();
+
+        if($cateExist === null){
+            $this->returnJson(1,'帮助分类不存在');
+        }
+
+        $data = [
+            'cate_id'=>$cateId,
+            'title'=>$title,
+            'answer'=>$answer,
+            'visible_store_type'=>$visible_store_type,
+            'sort_order'=>$sort,
+            'update_time'=>time(),
+        ];
+
+        $result = DB::table('help')
+            ->where('id',$id)
+            ->update($data);
+
+        if($result === false){
+            $this->returnJson(1,'更新失败');
+        }
+
+        $this->returnJson(0,'success',$result);
+
+
     }
 
     //删除
     public function delHelp()
     {
-        return 11111;
+        $this->_checkParams();
+        $params = $this->params;
+        $id = isset($params['id']) ? intval($params['id']) : 0;
+        if($id === 0){
+            $this->returnJson(1,'id缺失');
+        }
+
+        $result = DB::table('help')->where('id',$id)->update(['is_del'=>1]);
+
+        if($result === false){
+            $this->returnJson(1,'删除失败');
+        }
+
+        $this->returnJson(0,'seccess',$result);
     }
 
     //商户类型列表

@@ -34,6 +34,8 @@ Route::match(['get','post'],'helpCenter/delHelpCate','Api\HelpCenterController@d
 Route::match(['get','post'],'helpCenter/addHelp','Api\HelpCenterController@addHelp');
 //帮助列表
 Route::match(['get','post'],'helpCenter/helpList','Api\HelpCenterController@helpList');
+//帮助信息
+Route::match(['get','post'],'helpCenter/helpInfo','Api\HelpCenterController@helpInfo');
 //编辑帮助
 Route::match(['get','post'],'helpCenter/editHelp','Api\HelpCenterController@editHelp');
 //删除帮助
