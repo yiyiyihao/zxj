@@ -203,7 +203,6 @@ class HelpCenterController extends BasicController
         $userType = ADMIN_SYSTEM;
 
 
-
         $totalRows = DB::table('help')->where('is_del',0)->where($where)->whereRaw('FIND_IN_SET(?,visible_store_type)', [$userType])->count();
         if($totalRows == 0){
             $this->returnJson(0,'success',['total'=>0,'list'=>[]]);
